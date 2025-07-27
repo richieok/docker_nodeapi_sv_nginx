@@ -3,7 +3,7 @@
         evt.preventDefault(); // Prevent the default form submission
 		const formData = new FormData(form);
 
-		const response = await fetch('http://localhost/api/login', {
+		const response = await fetch('/api/login', {
 			method: 'POST',
 			body: formData
 		});
