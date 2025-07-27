@@ -34,6 +34,8 @@ export const authenticateToken = async (req, res, next) => {
 
 export const login = async (req, res) => {
     let { username, password } = req.body
+    console.log({ username, password });
+    console.log(DB_URI);
 
     try {
         await mongoose.connect(DB_URI)
