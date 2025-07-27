@@ -5,8 +5,8 @@
         <li><a href="/contact">Contact</a></li>
     </ul>
     <ul class="auth-links">
-        <li><a href="/#">Login</a></li>
-        <li><a href="/#">Signup</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/signup">Signup</a></li>
     </ul>
 </nav>
 

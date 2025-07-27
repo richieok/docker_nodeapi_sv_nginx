@@ -1,4 +1,5 @@
 import express from 'express';
+import multer from 'multer'
 import { getParameters } from './aws.js';
 
 const path = process.env['SSM_PARAMETER_PATH'] || '/devconzero/env/';
@@ -9,7 +10,11 @@ if (process.env.NODE_ENV === 'production') {
   }
 }
 
+import { authenticateToken, login, registerUser } from './auth.js';
+import { getWorkers } from './actions.js';
+
 const app = express();
+const upload = multer()
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
@@ -21,6 +26,12 @@ app.get('/api', (req, res) => {
 app.get('/api/test', (req, res) => {
   res.json({ "message": "Test endpoint", "status": "true", "test": process.env.TEST || 'NOT_FOUND' });
 });
+
+app.get('/api/workers', authenticateToken, getWorkers);
+
+app.post('/api/login', upload.none(), login);
+
+app.post('/api/signup', upload.none(), registerUser);
 
 const PORT = process.env.PORT || 4000;
 
