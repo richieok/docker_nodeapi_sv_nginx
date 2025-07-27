@@ -2,7 +2,12 @@ import { SSMClient, GetParametersByPathCommand } from "@aws-sdk/client-ssm"
 
 const client = new SSMClient({ region: 'us-east-1' });
 
-export async function getParameters(path) {
+await getParameters(process.env.SSM_PARAMETER_PATH || '/devconzero/env/');
+
+async function getParameters(path) {
+    if ( process.env.NODE_ENV !== 'production' && process.env.CLOUD !== 'aws') {
+        return;
+    }
     try {
         const input = {
             Path: path,

@@ -1,14 +1,6 @@
 import express from 'express';
 import multer from 'multer'
-import { getParameters } from './aws.js';
-
-const path = process.env['SSM_PARAMETER_PATH'] || '/devconzero/env/';
-
-if (process.env.NODE_ENV === 'production') {
-  if (process.env.CLOUD === 'aws') {
-    await getParameters(path)
-  }
-}
+import './aws.js';
 
 import { authenticateToken, login, registerUser } from './auth.js';
 import { getWorkers } from './actions.js';
