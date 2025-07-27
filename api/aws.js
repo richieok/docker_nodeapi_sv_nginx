@@ -11,6 +11,7 @@ export async function getParameters(path) {
         }
         const command = new GetParametersByPathCommand(input);
         const response = await client.send(command);
+        console.log("get parameters marker!")
 
         response.Parameters.forEach(param => {
             console.log(`Loading parameter: ${param.Name} with value: ${param.Value}`);
