@@ -2,12 +2,7 @@ import { SSMClient, GetParametersByPathCommand } from "@aws-sdk/client-ssm"
 
 const client = new SSMClient({ region: 'us-east-1' });
 
-await getParameters(process.env.SSM_PARAMETER_PATH || '/devconzero/env/');
-
-async function getParameters(path) {
-    if ( process.env.NODE_ENV !== 'production' && process.env.CLOUD !== 'aws') {
-        return;
-    }
+export async function getParameters(path) {
     try {
         const input = {
             Path: path,
@@ -15,9 +10,9 @@ async function getParameters(path) {
             WithDecryption: true
         }
         const command = new GetParametersByPathCommand(input);
-        console.log("get parameters marker 1!")
+        console.log("get parameters marker!")
         const response = await client.send(command);
-        console.log("get parameters marker 2!")
+        console.log("get parameters marker!")
         
         response.Parameters.forEach(param => {
             console.log(`Loading parameter: ${param.Name} with value: ${param.Value}`);
