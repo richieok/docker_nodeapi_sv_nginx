@@ -4,7 +4,7 @@
     let workerList;
 
 	async function loadDashboard(token) {
-		const response = await fetch(`http://localhost/api/workers`, {
+		const response = await fetch(`/api/workers`, {
 			method: 'GET',
 			headers: {
 				Authorization: `Bearer ${token}`,
