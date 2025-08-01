@@ -10,12 +10,10 @@ export async function getParameters(path) {
             WithDecryption: true
         }
         const command = new GetParametersByPathCommand(input);
-        console.log("get parameters marker!")
         const response = await client.send(command);
-        console.log("get parameters marker!")
         
         response.Parameters.forEach(param => {
-            console.log(`Loading parameter: ${param.Name} with value: ${param.Value}`);
+            // console.log(`Loading parameter: ${param.Name} with value: ${param.Value}`);
             const key = param.Name.replace(path, '').toUpperCase();
             process.env[key] = param.Value;
         });
